@@ -1,5 +1,7 @@
 import { ReactElement, ReactChildren } from "react";
 
+/* Clients API */
+
 export type TClient = {
     id?: number;
     firstName: string;
@@ -10,7 +12,7 @@ export type TClient = {
     comments?: string;
 }
 
-export type TClientState = {
+export type TClientsState = {
     clients: TClient[];
     isLoading: boolean;
     error: string | null;
