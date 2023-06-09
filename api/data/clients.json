@@ -1,0 +1,30 @@
+{
+  "clients": [
+    {
+      "firstName": "Melrose",
+      "lastName": "Berry",
+      "email": "m.berry@examplemail.com",
+      "phone": "(858)555-2951",
+      "status": true,
+      "comments": "Priority client.",
+      "id": 1
+    },
+    {
+      "firstName": "Asher",
+      "lastName": "Promise",
+      "email": "promise_asher92@examplemail.com",
+      "phone": "",
+      "status": false,
+      "comments": "Meeting every two weeks until completion.",
+      "id": 2
+    },
+    {
+      "firstName": "Marieta",
+      "lastName": "Davila",
+      "email": "mdavila@gmail.com",
+      "phone": "6195553456",
+      "comments": "Some comments",
+      "id": 3
+    }
+  ]
+}
