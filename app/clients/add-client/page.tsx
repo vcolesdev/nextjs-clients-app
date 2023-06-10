@@ -1,5 +1,5 @@
 import MainLayout from "@/app/main/layout";
-import PageHeader from "../../../components/PageHeader";
+import PageHeader from "@/components/PageHeader";
 
 export default function AddClient() {
   return (

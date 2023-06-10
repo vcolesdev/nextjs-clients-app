@@ -1,13 +1,11 @@
 import React from "react";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-// Components
-import AppBar from "@/components/AppBar";
-import AppFooter from "../components/AppFooter";
-import AppSidebar from "@/components/AppSidebar";
+// Custom Provider component to wrap the app in the Redux store.
+import { Providers } from "@/redux/provider";
 
 // Global styles
 import "../assets/styles/globals.scss";
+import App from "@/components/App";
 
 // Our App's metadata, used for SEO and injected into the <head>
 export const metadata = {
@@ -16,20 +14,17 @@ export const metadata = {
 };
 
 // The root layout for our app
-export default function RootLayout({ children }: { children: React.ReactNode; }) {
+export default function RootLayout({
+  children
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body>
-        <div id="App" className={"relative flex min-h-screen"}>
-          <AppSidebar />
-          <div className={"app flex flex-col w-full"}>
-            <AppBar />
-            <main className={"flex-grow p-10 bg-gray-100"}>
-              {children}
-            </main>
-            <AppFooter />
-          </div>
-        </div>
+        <Providers>
+          <App>{children}</App>
+        </Providers>
       </body>
     </html>
   );

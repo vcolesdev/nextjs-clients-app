@@ -1,7 +1,7 @@
 import useFooter from "@/api/hooks/useFooter";
 
-export default function AppFooter() {
-  const { date, email } = useFooter()
+export default function Footer() {
+  const { date, email } = useFooter();
 
   return (
     <footer className={"footer px-8 bg-gray-800"}>
@@ -12,9 +12,13 @@ export default function AppFooter() {
           <span className={"inline-block px-2 text-gray-600"}>|</span>
           Made with
           <span className={"inline-block text-gray-300 mx-1"}>&hearts;</span>
-          <span className={"cursor-pointer hover:underline hover:text-gray-300"}>{email}</span>
+          <span
+            className={"cursor-pointer hover:underline hover:text-gray-300"}
+          >
+            {email}
+          </span>
         </p>
       </div>
     </footer>
-    );
+  );
 }

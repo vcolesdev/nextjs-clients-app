@@ -1,5 +1,3 @@
-import { ReactElement, ReactChildren } from "react";
-
 /* Clients API */
 
 export type TClient = {
@@ -14,6 +12,4 @@ export type TClient = {
 
 export type TClientsState = {
   clients: TClient[];
-  isLoading: boolean;
-  error: string | null;
 };
