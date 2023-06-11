@@ -26,21 +26,33 @@ export const clientsApi = createApi({
   tagTypes: ["Clients"], // Allows automatic refreshing of data.
 
   endpoints: (builder) => ({
+    // Retrieve our clients list.
     getClientsList: builder.query<any, void>({
       query: () => "/clients",
       providesTags: [{ type: "Clients", id: "LIST" }]
     }),
 
+    // Retrieve a single client.
     getClient: builder.query({
       query: (clientId) => `/clients/${clientId}`,
       providesTags: [{ type: "Clients", id: "LIST" }]
     }),
 
+    // Add a new client.
     addNewClient: builder.mutation({
       query: (initialClient) => ({
         url: `/clients`,
         method: "POST",
         body: initialClient
+      }),
+      invalidatesTags: [{ type: "Clients", id: "LIST" }]
+    }),
+
+    // Remove a client.
+    removeClient: builder.mutation({
+      query: (clientId) => ({
+        url: `/clients/${clientId}`,
+        method: "DELETE"
       }),
       invalidatesTags: [{ type: "Clients", id: "LIST" }]
     })
@@ -50,5 +62,6 @@ export const clientsApi = createApi({
 export const {
   useGetClientsListQuery,
   useGetClientQuery,
-  useAddNewClientMutation
+  useAddNewClientMutation,
+  useRemoveClientMutation
 } = clientsApi;
