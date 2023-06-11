@@ -23,7 +23,16 @@ export default function ClientsDirectory() {
       {isError && <p>{error.toString()}</p>}
       {isSuccess && (
         <TableContainer>
-          <THead items={["ID", "Full Name", "Email", "Phone", "Status"]} />
+          <THead
+            items={[
+              "ID",
+              "Full Name",
+              "Email",
+              "Phone",
+              "Status",
+              "Date Added"
+            ]}
+          />
           <TBody>
             {clients &&
               clients.map((client: TClient) => (

@@ -34,8 +34,21 @@ export const clientsApi = createApi({
     getClient: builder.query({
       query: (clientId) => `/clients/${clientId}`,
       providesTags: [{ type: "Clients", id: "LIST" }]
+    }),
+
+    addNewClient: builder.mutation({
+      query: (initialClient) => ({
+        url: `/clients`,
+        method: "POST",
+        body: initialClient
+      }),
+      invalidatesTags: [{ type: "Clients", id: "LIST" }]
     })
   })
 });
 
-export const { useGetClientsListQuery, useGetClientQuery } = clientsApi;
+export const {
+  useGetClientsListQuery,
+  useGetClientQuery,
+  useAddNewClientMutation
+} = clientsApi;

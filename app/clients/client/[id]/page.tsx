@@ -47,37 +47,37 @@ export default function Client({ params }: { params: { id: string } }) {
               <dl className="divide-y divide-gray-100">
                 {/* Full name */}
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt className="font-medium leading-6 text-gray-900">
+                  <dt className="text-sm tracking-tight font-medium leading-6 text-gray-900">
                     Full name
                   </dt>
-                  <dd className="mt-1 leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                     {client.firstName} {client.lastName}
                   </dd>
                 </div>
                 {/* Email Address */}
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt className="font-medium leading-6 text-gray-900">
+                  <dt className="text-sm tracking-tight font-medium leading-6 text-gray-900">
                     Email Address
                   </dt>
-                  <dd className="mt-1 leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                     {client.email}
                   </dd>
                 </div>
                 {/* Phone Number */}
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt className="font-medium leading-6 text-gray-900">
+                  <dt className="text-sm tracking-tight font-medium leading-6 text-gray-900">
                     Phone Number
                   </dt>
-                  <dd className="mt-1 leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                     {client.phone ? client.phone : "–"}
                   </dd>
                 </div>
                 {/* Status */}
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt className="font-medium leading-6 text-gray-900">
+                  <dt className="text-sm tracking-tight font-medium leading-6 text-gray-900">
                     Status
                   </dt>
-                  <dd className="mt-1 leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                     {client.status === true ? "Active" : "Inactive"}
                   </dd>
                 </div>

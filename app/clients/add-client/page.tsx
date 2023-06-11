@@ -1,12 +1,16 @@
+"use client";
+
+import React from "react";
 import MainLayout from "@/app/main/layout";
 import PageHeader from "@/components/PageHeader";
+import FormAddClient from "@/components/Clients/forms/FormAddClient";
 
 export default function AddClient() {
   return (
     <>
-      <PageHeader title={"Add Client"} />
+      <PageHeader title={"Add New Client"} />
       <MainLayout>
-        <p>A form to add a client will populate here...</p>
+        <FormAddClient />
       </MainLayout>
     </>
   );

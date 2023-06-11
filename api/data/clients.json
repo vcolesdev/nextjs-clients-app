@@ -25,6 +25,14 @@
       "phone": "6195553456",
       "comments": "Some comments",
       "id": 3
+    },
+    {
+      "firstName": "Cherry",
+      "lastName": "Mix",
+      "email": "mix.cherry@examplemail.com",
+      "phone": "6195553456",
+      "comments": "This is my newest client.",
+      "id": 4
     }
   ]
 }
