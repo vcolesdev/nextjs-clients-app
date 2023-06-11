@@ -23,18 +23,19 @@ export const clientsApi = createApi({
     }
   },
 
-  // Allows automatic refreshing of data.
-  // @link https://redux-toolkit.js.org/rtk-query/usage/automated-refetching
-  tagTypes: ["Clients"],
+  tagTypes: ["Clients"], // Allows automatic refreshing of data.
 
-  // The "endpoints" represent operations and requests for this server.
   endpoints: (builder) => ({
-    // Get a list of clients.
     getClientsList: builder.query<any, void>({
       query: () => "/clients",
+      providesTags: [{ type: "Clients", id: "LIST" }]
+    }),
+
+    getClient: builder.query({
+      query: (clientId) => `/clients/${clientId}`,
       providesTags: [{ type: "Clients", id: "LIST" }]
     })
   })
 });
 
-export const { useGetClientsListQuery } = clientsApi;
+export const { useGetClientsListQuery, useGetClientQuery } = clientsApi;
