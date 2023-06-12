@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { TClientsState } from "@/api/_types";
 import { REHYDRATE } from "redux-persist";
 
 /**
@@ -48,6 +47,20 @@ export const clientsApi = createApi({
       invalidatesTags: [{ type: "Clients", id: "LIST" }]
     }),
 
+    // Update a client.
+    updateClient: builder.mutation({
+      query: (client) => {
+        console.log("Client ID: ", client.id);
+        console.log("Client: ", client);
+        return {
+          url: `/clients/${client.id}`,
+          method: "PATCH",
+          body: client
+        };
+      },
+      invalidatesTags: [{ type: "Clients", id: "LIST" }]
+    }),
+
     // Remove a client.
     removeClient: builder.mutation({
       query: (clientId) => ({
@@ -63,5 +76,6 @@ export const {
   useGetClientsListQuery,
   useGetClientQuery,
   useAddNewClientMutation,
+  useUpdateClientMutation,
   useRemoveClientMutation
 } = clientsApi;

@@ -23,8 +23,18 @@
       "lastName": "Davila",
       "email": "mdavila@examplemail.com",
       "phone": "6195553456",
+      "status": false,
       "comments": "Some comments",
       "id": 3
+    },
+    {
+      "firstName": "Raspberry",
+      "lastName": "Soda",
+      "email": "mix.soda@examplemail.com",
+      "phone": "6195553456",
+      "comments": "Cherry mix yo.",
+      "id": 4,
+      "status": true
     }
   ]
 }

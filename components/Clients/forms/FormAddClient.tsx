@@ -5,7 +5,17 @@ import { useForm } from "react-hook-form";
 import { useAddNewClientMutation } from "@/redux/features/clientsApi";
 import { TClient } from "@/api/_types";
 
-export default function FormAddClient() {
+export default function FormAddClient({
+  action,
+  extraClasses,
+  formId,
+  name
+}: {
+  action: string;
+  extraClasses?: string;
+  formId: string;
+  name: string;
+}) {
   const {
     formState,
     formState: { errors },
@@ -31,6 +41,12 @@ export default function FormAddClient() {
         phone: "",
         comments: ""
       });
+
+      // Display success message.
+      const alert = document.getElementById("AlertAddClient");
+      if (alert) {
+        alert.style.display = "flex";
+      }
     }
   }, [isSubmitSuccessful, reset]);
 
@@ -71,10 +87,10 @@ export default function FormAddClient() {
 
   return (
     <form
-      action={"/"}
-      className={"form"}
-      id={"formAddNewClient"}
-      name={"formAddNewClient"}
+      action={action}
+      className={`form ${extraClasses}`}
+      id={formId}
+      name={name}
       onSubmit={handleSubmit(handleAddClient)}
     >
       <div className="form__fields">
