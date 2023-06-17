@@ -4,9 +4,9 @@
       "firstName": "Melrose",
       "lastName": "Berry",
       "email": "m.berry@examplemail.com",
-      "phone": "(858)555-2951",
+      "phone": "",
       "status": true,
-      "comments": "Priority client.",
+      "comments": "This is a priority client.",
       "id": 1
     },
     {
@@ -14,7 +14,7 @@
       "lastName": "Promise",
       "email": "promise_asher92@examplemail.com",
       "phone": "",
-      "status": false,
+      "status": true,
       "comments": "Meeting every two weeks until completion.",
       "id": 2
     },
@@ -22,7 +22,7 @@
       "firstName": "Marieta",
       "lastName": "Davila",
       "email": "mdavila@examplemail.com",
-      "phone": "6195553456",
+      "phone": "",
       "status": false,
       "comments": "Some comments",
       "id": 3
@@ -31,8 +31,8 @@
       "firstName": "Raspberry",
       "lastName": "Soda",
       "email": "mix.soda@examplemail.com",
-      "phone": "6195553456",
-      "comments": "Cherry mix yo.",
+      "phone": "",
+      "comments": "<p>This is a comment updated.</p>\n",
       "id": 4,
       "status": true
     }

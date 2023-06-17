@@ -13,3 +13,10 @@ export type TClient = {
 export type TClientsState = {
   clients: TClient[];
 };
+
+/* Alerts State */
+
+export type TAlertState = {
+  currentElement: any | null;
+  isOpen: boolean;
+};

@@ -5,7 +5,8 @@ import TableContainer from "@/components/Table/TableContainer";
 import THead from "@/components/Table/THead";
 import TBody from "@/components/Table/TBody";
 import TClientRow from "@/components/Table/TClientRow";
-import { TClient, TClientsState } from "@/api/_types";
+import { Spinner } from "@chakra-ui/react";
+import { TClient } from "@/api/_types";
 import { useGetClientsListQuery } from "@/redux/features/clientsApi";
 
 export default function ClientsDirectory() {
@@ -19,7 +20,7 @@ export default function ClientsDirectory() {
 
   return (
     <>
-      {isLoading && <p>LOADING...</p>}
+      {isLoading && <Spinner size="lg" />}
       {isError && <p>{error.toString()}</p>}
       {isSuccess && (
         <TableContainer>
@@ -30,7 +31,8 @@ export default function ClientsDirectory() {
               "Email",
               "Phone",
               "Status",
-              "Date Added"
+              "Date Added",
+              "Actions"
             ]}
           />
           <TBody>

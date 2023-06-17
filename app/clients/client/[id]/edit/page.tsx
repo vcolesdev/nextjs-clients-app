@@ -3,9 +3,11 @@
 import React from "react";
 import MainLayout from "@/app/main/layout";
 import PageHeader from "@/components/PageHeader";
-import FormUpdateClient from "@/components/Clients/forms/FormUpdateClient";
 import Alert from "@/components/Alert";
+import Badge from "@/components/Badge";
+import FormUpdateClient from "@/components/Clients/forms/FormUpdateClient";
 import { useGetClientQuery } from "@/redux/features/clientsApi";
+import { Spinner } from "@chakra-ui/react";
 
 export default function UpdateClient({ params }: { params: { id: string } }) {
   const {
@@ -19,15 +21,11 @@ export default function UpdateClient({ params }: { params: { id: string } }) {
   return (
     <>
       <PageHeader title={"Update Client"} />
-      <Alert
-        type={"success"}
-        id={"AlertUpdateClient"}
-        style={{ display: "none" }}
-      >
+      <Alert type={"success"} id={"AlertUpdateClient"} isOpen={false}>
         <span>Success! Client has been successfully updated.</span>
       </Alert>
       <MainLayout>
-        {isFetching && <p>FETCHING CLIENT INFO..</p>}
+        {isFetching && <Spinner size="lg" />}
         {isError && <p>ERROR LOADING CLIENT...</p>}
         {isSuccess && client && (
           <>
@@ -74,7 +72,11 @@ export default function UpdateClient({ params }: { params: { id: string } }) {
                     Status
                   </dt>
                   <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {client.status === true ? "Active" : "Inactive"}
+                    {client.status ? (
+                      <Badge label={"Active"} type={"success"} />
+                    ) : (
+                      <Badge label={"Inactive"} type={"danger"} />
+                    )}
                   </dd>
                 </div>
               </dl>

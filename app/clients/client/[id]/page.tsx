@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import MainLayout from "@/app/main/layout";
 import PageHeader from "@/components/PageHeader";
 import Link from "next/link";
@@ -9,6 +9,8 @@ import {
   useGetClientQuery,
   useRemoveClientMutation
 } from "@/redux/features/clientsApi";
+import Badge from "@/components/Badge";
+import { Spinner } from "@chakra-ui/react";
 
 export default function Client({ params }: { params: { id: string } }) {
   const {
@@ -25,12 +27,17 @@ export default function Client({ params }: { params: { id: string } }) {
   // Next.js router.
   const router = useRouter();
 
+  // Control alert state.
+  const [isOpen, setIsOpen] = useState(false);
+
   // Handle removing a client.
   const handleRemoveClient = () => {
     if (window.confirm("Are you sure you want to delete this client?")) {
       removeClient(params.id);
       router.push("/clients/dashboard");
     }
+
+    //setIsOpen(true);
   };
 
   return (
@@ -49,7 +56,7 @@ export default function Client({ params }: { params: { id: string } }) {
         </>
       )}
       <MainLayout>
-        {isFetching && <p>Fetching client by ID...</p>}
+        {isFetching && <Spinner size="lg" />}
         {isError && <p>{error.toString()}</p>}
         {isSuccess && (
           <>
@@ -97,7 +104,11 @@ export default function Client({ params }: { params: { id: string } }) {
                     Status
                   </dt>
                   <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {client.status === true ? "Active" : "Inactive"}
+                    {client.status === true ? (
+                      <Badge label={"Active"} type={"success"} />
+                    ) : (
+                      <Badge label={"Inactive"} type={"danger"} />
+                    )}
                   </dd>
                 </div>
               </dl>
@@ -115,7 +126,8 @@ export default function Client({ params }: { params: { id: string } }) {
               <div className={""}>
                 <button
                   className={
-                    "inline-block px-3 py-2 rounded-md font-semibold bg-gray-50 text-red-500 text-sm hover:bg-red-50 hover:text-red-600"
+                    "inline-block px-3 py-2 rounded-md font-semibold bg-gray-50 text-red-500 " +
+                    "text-sm hover:bg-red-50 hover:text-red-600 active:bg-red-100"
                   }
                   onClick={handleRemoveClient}
                 >

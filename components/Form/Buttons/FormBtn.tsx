@@ -3,23 +3,22 @@ import Link from "next/link";
 
 export default function FormBtn({
   btnClasses,
-  children,
   contentClasses,
   href,
   id,
+  label,
   onClick,
   type
 }: {
   btnClasses?: string;
-  children: React.ReactNode;
   contentClasses?: string;
   href?: string;
   id?: string;
+  label?: string;
   onClick?: any;
   type: string;
 }) {
   let button;
-
   if (type === "submit") {
     button = (
       <button
@@ -31,7 +30,7 @@ export default function FormBtn({
         type={"submit"}
       >
         <span className={`inline-block ${contentClasses && contentClasses}`}>
-          {children}
+          {label}
         </span>
       </button>
     );
@@ -46,7 +45,7 @@ export default function FormBtn({
         type={"reset"}
       >
         <span className={`inline-block ${contentClasses && contentClasses}`}>
-          {children}
+          {label}
         </span>
       </button>
     );
@@ -60,7 +59,7 @@ export default function FormBtn({
         id={id ? id : ""}
       >
         <span className={`inline-block ${contentClasses && contentClasses}`}>
-          {children}
+          {label}
         </span>
       </Link>
     );

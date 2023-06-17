@@ -1,10 +1,13 @@
 import React from "react";
 
 // Custom Provider component to wrap the app in the Redux store.
-import { Providers } from "@/redux/provider";
+import { Providers } from "@/redux/providers";
+import { AppProviders } from "@/api/providers/appProviders";
 
 // Global styles
 import "../assets/styles/globals.scss";
+
+// App component
 import App from "@/components/App";
 
 // Our App's metadata, used for SEO and injected into the <head>
@@ -23,7 +26,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <App>{children}</App>
+          <AppProviders>
+            <App>{children}</App>
+          </AppProviders>
         </Providers>
       </body>
     </html>

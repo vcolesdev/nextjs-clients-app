@@ -1,13 +1,36 @@
-import React, { useState } from "react";
-import FormBtn from "@/components/Controls/Buttons/FormBtn";
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import React, { useEffect } from "react";
+import FormBtn from "@/components/Form/Buttons/FormBtn";
+import Input from "@/components/Controls/Input";
+import Label from "@/components/Form/Label";
+import FormError from "@/components/Form/Error";
+import CustomButton from "@/components/Controls/Button";
+import CustomEditor from "@/components/Controls/CustomEditor";
+import useUpdateClient from "@/components/Clients/hooks/useUpdateClient";
+import { Controller } from "react-hook-form";
 import {
-  useGetClientQuery,
-  useUpdateClientMutation
-} from "@/redux/features/clientsApi";
-import { Dialog } from "@headlessui/react";
+  Divider,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Switch
+} from "@chakra-ui/react";
 
+/**
+ * FormUpdateClient
+ * @param action
+ * @param client
+ * @param clientId
+ * @param extraClasses
+ * @param formId
+ * @param name
+ * @constructor
+ * Form component for updating a client.
+ * @link https://stackoverflow.com/questions/62176047/react-hook-form-controller-with-react-draft-wysiwyg
+ */
 export default function FormUpdateClient({
   action,
   client,
@@ -23,196 +46,195 @@ export default function FormUpdateClient({
   formId: string;
   name: string;
 }) {
-  // React Hook Form
   const {
-    formState,
-    formState: { errors },
-    formState: { isSubmitSuccessful },
-    getValues,
+    control,
+    errors,
+    fields,
+    formClasses,
     handleSubmit,
+    handleUpdateClient,
+    isOpen,
     register,
-    reset
-  } = useForm();
+    setIsOpen
+  } = useUpdateClient(client, clientId);
 
-  // Mutation triggers
-  const [updateClient, { isLoading: isUpdating, isSuccess }] =
-    useUpdateClientMutation();
-
-  const { data: currentClient } = useGetClientQuery(clientId);
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  // Reset the form on component mount.
-  useEffect(() => {
-    if (currentClient) {
-      reset({
-        firstName: currentClient.firstName,
-        lastName: currentClient.lastName,
-        email: currentClient.email,
-        phone: currentClient.phone || "",
-        comments: currentClient.comments || "",
-        status: currentClient.status // Gets the current client status on render.
-      });
-    }
-  }, [currentClient, reset]);
-
-  // Update the client on successful form submission.
-  const handleUpdateClient = () => {
-    const values = getValues();
-    updateClient({
-      ...client,
-      firstName: values.firstName,
-      lastName: values.lastName,
-      email: values.email,
-      phone: values.phone,
-      comments: values.comments
-    });
-
-    // Display success message.
-    const alert = document.getElementById("AlertUpdateClient");
-    if (alert) {
-      alert.style.display = "flex";
-    }
-  };
-
-  // Form classes
-  const formClasses = {
-    label:
-      "inline-block mb-1.5 text-sm font-medium tracking-tight " +
-      "text-gray-700",
-    input:
-      "block w-full px-3 py-3 rounded-md border border-gray-300 " +
-      "focus:border-violet-300 focus:ring focus:ring-violet-200 " +
-      "focus:ring-opacity-50 text-sm tracking-tight text-gray-700",
-    error: "text-red-500 text-xs italic"
-  };
+  const [viewComments, setViewComments] = React.useState(false);
 
   return (
     <>
-      <form
-        action={action}
-        className={`form ${extraClasses}`}
-        id={formId}
-        name={name}
-        onSubmit={handleSubmit(handleUpdateClient)}
-      >
-        <div className="form__fields">
-          {/* First Name */}
-          <div className="mb-3">
-            <label className={formClasses.label}>First Name</label>
-            <input
-              className={`${formClasses.input}`}
-              id="firstname"
-              type="text"
-              {...register("firstName", { required: true })}
-            />
-            <div>
-              {errors.firstName?.type === "required" && (
-                <p className={formClasses.error} role="alert">
-                  <span className="font-semibold">Form Error:</span> First name
-                  is required
-                </p>
-              )}
+      {client && (
+        <form
+          action={action}
+          className={`form ${extraClasses}`}
+          id={formId}
+          name={name}
+          onSubmit={handleSubmit(handleUpdateClient)}
+        >
+          <div className="form__fields">
+            {fields &&
+              fields.map((field) => (
+                <div key={field.id} className="mb-5">
+                  <Label htmlFor={field.id} labelClasses={formClasses.label}>
+                    {field.label}{" "}
+                    {field.required && (
+                      <span className={"text-red-500"}>*</span>
+                    )}
+                  </Label>
+                  <Input
+                    inputClasses={formClasses.input}
+                    id={field.id}
+                    type={field.type}
+                    {...register(field.id, { required: field.required })}
+                  />
+                  <div>
+                    {errors.field?.type === "required" && (
+                      <FormError
+                        errorClasses={formClasses.error}
+                        errorLabel={field.label}
+                      />
+                    )}
+                  </div>
+                </div>
+              ))}
+            {/* Client Status */}
+            <div className={"my-6"}>
+              <p className={formClasses.label}>Client Status</p>
+              <div>
+                <Switch
+                  id="isActiveClientUpdated"
+                  {...register("status", {})}
+                  onChange={(e) => e.target.checked === !e.target.checked}
+                />
+              </div>
+            </div>
+            {/* Edit Client Comments */}
+            <div className={"my-6"}>
+              <p className={`mb-3 ${formClasses.label}`}>
+                Edit notes, comments about client:
+              </p>
+              <div className={"flex"}>
+                <CustomButton
+                  activeColor={"violet-600"}
+                  activeTextColor={"white"}
+                  color={"violet-50"}
+                  extraClasses={"mr-3"}
+                  hoverColor={"violet-500"}
+                  hoverTextColor={"white"}
+                  label={"Edit Comments"}
+                  onClick={() => setIsOpen(true)}
+                  textColor={"violet-500"}
+                />
+                <CustomButton
+                  activeColor={"slate-700"}
+                  color={"slate-100"}
+                  activeTextColor={"slate-600"}
+                  hoverColor={"slate-200"}
+                  hoverTextColor={"blue-700"}
+                  label={"View Comments"}
+                  onClick={() => setViewComments(true)}
+                  textColor={"slate-600"}
+                />
+              </div>
             </div>
           </div>
-          {/* Last Name */}
-          <div className="mb-3">
-            <label className={formClasses.label}>Last Name</label>
-            <input
-              className={`${formClasses.input}`}
-              id="lastname"
-              type="text"
-              {...register("lastName", { required: true })}
+          <Divider />
+          {/* Form Actions */}
+          <div className="form__actions py-6">
+            <FormBtn
+              label={"Update Client"}
+              type={"submit"}
+              onClick={() => console.log("Update form submitted")}
             />
-            <div>
-              {errors.firstName?.type === "required" && (
-                <p className={formClasses.error} role="alert">
-                  <span className="font-semibold">Form Error:</span> First name
-                  is required
-                </p>
-              )}
-            </div>
-          </div>
-          {/* Email */}
-          <div className="mb-3">
-            <label className={formClasses.label}>Email Address</label>
-            <input
-              className={`mb-3 ${formClasses.input}`}
-              id="email"
-              {...register("email", { required: true })}
-            />
-            <div>
-              {errors.email?.type === "required" && (
-                <p className={formClasses.error} role="alert">
-                  Email is required
-                </p>
-              )}
-            </div>
-          </div>
-          {/* Phone */}
-          <div className="mb-3">
-            <label className={formClasses.label}>Phone Number</label>
-            <input
-              className={`mb-3 ${formClasses.input}`}
-              id="phone"
-              type="tel"
-              {...register("phone")}
+            <FormBtn label={"Reset Form"} type={"reset"} />
+            <FormBtn
+              href={"/clients/dashboard"}
+              label={"Cancel"}
+              type={"cancel"}
             />
           </div>
-          {/* Status */}
-
-          {/* Comments */}
-          <div>
-            <label className={formClasses.label}>Comments</label>
-            <textarea
-              className={`${formClasses.input}`}
-              id="comments"
-              placeholder="Some client comments here..."
-              {...register("comments")}
-            />
-          </div>
-          <div className={"my-6"}>
-            <button
-              className={
-                "rounded-md px-3 py-2 bg-violet-50 text-violet-500 text-sm font-semibold " +
-                "tracking-tight hover:bg-violet-500 hover:text-white active:bg-violet-600"
-              }
-              type={"button"}
-            >
-              Edit Client Comments
-            </button>
-          </div>
-        </div>
-        {/* Form Actions */}
-        <div className="form__actions py-6">
-          <FormBtn
-            type={"submit"}
-            onClick={() => console.log("Update form submitted")}
+          {/* Modal */}
+          <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} size={"full"}>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader className={"tracking-tight"}>
+                Client Comments
+              </ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <div className={"mb-4"}>
+                  <p className={"text-sm text-gray-700 tracking-tight"}>
+                    Edit comments about client using the textarea below.
+                  </p>
+                </div>
+                {/* Comments */}
+                <div>
+                  <Label htmlFor={"comments"} labelClasses={formClasses.label}>
+                    Comments
+                  </Label>
+                  <Controller
+                    control={control}
+                    name={"comments"}
+                    render={({ field }) => (
+                      <CustomEditor
+                        editorClasses={"p-4 text-sm text-gray-600"}
+                        editorState={field.value}
+                        onChange={field.onChange}
+                        value={field.value}
+                        wrapperClasses={"border border-gray-300"}
+                      />
+                    )}
+                  />
+                </div>
+              </ModalBody>
+              <ModalFooter>
+                <CustomButton
+                  activeColor={"violet-600"}
+                  activeTextColor={"white"}
+                  color={"violet-50"}
+                  hoverColor={"violet-500"}
+                  hoverTextColor={"white"}
+                  label={"Save Comments"}
+                  onClick={() => setIsOpen(false)}
+                  textColor={"violet-500"}
+                />
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
+          {/* View Comments Modal */}
+          {/* Modal */}
+          <Modal
+            isOpen={viewComments}
+            onClose={() => setViewComments(false)}
+            size={"full"}
           >
-            Update Client
-          </FormBtn>
-          <FormBtn type={"reset"}>Reset Form</FormBtn>
-          <FormBtn href={"/clients/dashboard"} type={"cancel"}>
-            Cancel
-          </FormBtn>
-        </div>
-      </form>
-      <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
-        <Dialog.Panel>
-          <Dialog.Title>Deactivate account</Dialog.Title>
-          <Dialog.Description>
-            This will permanently deactivate your account
-          </Dialog.Description>
-
-          <p>
-            Are you sure you want to deactivate your account? All of your data
-            will be permanently removed. This action cannot be undone.
-          </p>
-
-          <button onClick={() => setIsOpen(false)}>Deactivate</button>
-          <button onClick={() => setIsOpen(false)}>Cancel</button>
-        </Dialog.Panel>
-      </Dialog>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader className={"tracking-tight"}>
+                View Client Comments
+              </ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                {/* Comments */}
+                <div>
+                  <div>Client comments here...</div>
+                </div>
+              </ModalBody>
+              <ModalFooter>
+                <CustomButton
+                  activeColor={"violet-600"}
+                  activeTextColor={"white"}
+                  color={"violet-50"}
+                  hoverColor={"violet-500"}
+                  hoverTextColor={"white"}
+                  label={"Close"}
+                  onClick={() => setViewComments(false)}
+                  textColor={"violet-500"}
+                />
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
+        </form>
+      )}
     </>
   );
 }

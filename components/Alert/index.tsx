@@ -9,27 +9,20 @@ export default function Alert({
   alertClasses,
   children,
   id,
+  isOpen,
   style,
   type
 }: {
   alertClasses?: string;
   children: React.ReactNode;
   id?: string;
+  isOpen?: boolean;
   style?: React.CSSProperties;
   type: string;
 }) {
   let isSuccess = type === "success";
   let isWarning = type === "warning";
   let isError = type === "error";
-
-  const onDismiss = () => {
-    if (id) {
-      const alert = document.getElementById(id);
-      if (alert) {
-        alert.style.display = "none";
-      }
-    }
-  };
 
   return (
     <div
@@ -41,9 +34,10 @@ export default function Alert({
           : isError
           ? "text-gray-700"
           : ""
-      } ${alertClasses && alertClasses}`}
+      } ${alertClasses ? alertClasses : ""}`}
       id={id ? id : ""}
-      style={style && style}
+      role={"alert"}
+      style={{ display: isOpen ? "flex" : "none", ...style }}
     >
       <div className={"flex"}>
         <div className={"flex-shrink-0"}>
@@ -65,7 +59,8 @@ export default function Alert({
       <div className={"ml-auto pl-3"}>
         <div className={"-mx-1.5 -my-1.5"}>
           <button
-            type={"button"}
+            aria-label={"Dismiss"}
+            data-dismiss={"alert"}
             className={`inline-flex mt-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-50 ${
               isSuccess
                 ? "text-green-500 focus:ring-green-400"
@@ -75,7 +70,10 @@ export default function Alert({
                 ? "text-red-500 focus:ring-red-400"
                 : ""
             }`}
-            onClick={onDismiss}
+            onClick={() => {
+              console.log("Dismissed alert");
+            }}
+            type={"button"}
           >
             <span className={"sr-only"}>Dismiss</span>
             <XMarkIcon className={"h-5 w-5"} aria-hidden={"true"} />

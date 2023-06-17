@@ -1,11 +1,12 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { clientsApi } from "@/redux/features/clientsApi";
 
+const reducers = combineReducers({
+  [clientsApi.reducerPath]: clientsApi.reducer
+});
+
 export const store = configureStore({
-  reducer: {
-    // The reducer generated from our clientsApi.
-    [clientsApi.reducerPath]: clientsApi.reducer
-  },
+  reducer: reducers,
   middleware: (getDefaultMiddleware) => {
     // The middleware generated from our clientsApi manages cache lifetime and expirations.
     return getDefaultMiddleware().concat(clientsApi.middleware).concat();

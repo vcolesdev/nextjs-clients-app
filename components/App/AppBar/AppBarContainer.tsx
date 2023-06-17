@@ -9,7 +9,7 @@ export default function AppBarContainer({
 }) {
   return (
     <header
-      className={`flex justify-between relative shadow shadow-slate-200 z-40 ${
+      className={`flex justify-between relative shadow shadow-slate-200 border border-t-[6px] border-t-violet-500 z-40 ${
         extraClasses && extraClasses
       }`}
     >

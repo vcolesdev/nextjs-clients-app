@@ -9,14 +9,11 @@ export default function THead({ items }: { items: any[] }) {
             <th
               key={item}
               scope="col"
-              className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
+              className="py-3.5 pl-4 pr-3 text-left font-medium text-gray-700 text-sm tracking-tight sm:pl-0 last:text-right"
             >
               {item}
             </th>
           ))}
-        <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">
-          <span className="sr-only">Edit</span>
-        </th>
       </tr>
     </thead>
   );

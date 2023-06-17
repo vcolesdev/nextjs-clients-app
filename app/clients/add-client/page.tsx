@@ -10,7 +10,7 @@ export default function AddClient() {
   return (
     <>
       <PageHeader title={"Add New Client"} />
-      <Alert type={"success"} id={"AlertAddClient"} style={{ display: "none" }}>
+      <Alert type={"success"} id={"AlertAddClient"} isOpen={false}>
         Success! A new client has been added to the database.
       </Alert>
       <MainLayout>
