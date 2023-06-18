@@ -5,9 +5,11 @@ import MainLayout from "@/app/main/layout";
 import PageHeader from "@/components/PageHeader";
 import Alert from "@/components/Alert";
 import Badge from "@/components/Badge";
-import FormUpdateClient from "@/components/Clients/forms/FormUpdateClient";
-import { useGetClientQuery } from "@/redux/features/clientsApi";
+import FormUpdateClient from "@/components/Clients/forms/UpdateClient";
 import { Spinner } from "@chakra-ui/react";
+import { useGetClientQuery } from "@/redux/features/clientsApi";
+import ContentHeader from "@/components/Content/Header";
+import { useRouter } from "next/navigation";
 
 export default function UpdateClient({ params }: { params: { id: string } }) {
   const {
@@ -18,25 +20,29 @@ export default function UpdateClient({ params }: { params: { id: string } }) {
     isSuccess
   } = useGetClientQuery(params.id);
 
+  const router = useRouter();
+  const [isAlertOpen, setIsAlertOpen] = React.useState(false);
+
   return (
     <>
       <PageHeader title={"Update Client"} />
-      <Alert type={"success"} id={"AlertUpdateClient"} isOpen={false}>
+      <Alert
+        type={"success"}
+        id={"AlertUpdateClient"}
+        isOpen={isAlertOpen}
+        onDismiss={() => setIsAlertOpen(false)}
+      >
         <span>Success! Client has been successfully updated.</span>
       </Alert>
       <MainLayout>
         {isFetching && <Spinner size="lg" />}
-        {isError && <p>ERROR LOADING CLIENT...</p>}
+        {isError && <p>Error: ${error.toString()}</p>}
         {isSuccess && client && (
           <>
-            <div className="px-4 sm:px-0">
-              <h3 className="font-semibold leading-7 text-gray-800 tracking-tight">
-                Client Information
-              </h3>
-              <p className="mt-1 max-w-2xl leading-6 text-gray-500 text-sm">
-                Personal details and information.
-              </p>
-            </div>
+            <ContentHeader
+              headingText={"Client Information"}
+              subheadingText={"Personal details and information."}
+            />
             <div className="mt-6 border-t border-gray-100 mb-10">
               <dl className="divide-y divide-gray-100">
                 {/* Full name */}
@@ -83,20 +89,23 @@ export default function UpdateClient({ params }: { params: { id: string } }) {
             </div>
           </>
         )}
-        <div className="px-4 py-6 sm:px-0 border-b border-gray-100 mb-10">
-          <h3 className="font-semibold leading-7 text-gray-800 tracking-tight">
-            Update Client Form
-          </h3>
-          <p className="mt-1 max-w-2xl leading-6 text-gray-500 text-sm">
-            Update the personal information and details for this client.
-          </p>
-        </div>
+        <ContentHeader
+          containerClasses={"py-6 border-b border-gray-100 mb-10"}
+          headingText={"Update Client Form"}
+          subheadingText={
+            "Update the personal information and details for this client."
+          }
+        />
         <FormUpdateClient
           client={client}
           clientId={params.id}
           extraClasses={"form--update-client"}
           formId={"formUpdateClient"}
           name={"formUpdateClient"}
+          onClickSubmit={() => {
+            setIsAlertOpen(true);
+            router.push(`/clients/client/${params.id}/edit`);
+          }}
         />
       </MainLayout>
     </>

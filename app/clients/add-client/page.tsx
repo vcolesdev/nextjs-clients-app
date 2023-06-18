@@ -3,14 +3,23 @@
 import React from "react";
 import MainLayout from "@/app/main/layout";
 import PageHeader from "@/components/PageHeader";
-import FormAddClient from "@/components/Clients/forms/FormAddClient";
 import Alert from "@/components/Alert";
+import FormAddClient from "@/components/Clients/forms/AddClient";
+import { useRouter } from "next/navigation";
 
 export default function AddClient() {
+  const [isAlertOpen, setIsAlertOpen] = React.useState(false);
+  const router = useRouter();
+
   return (
     <>
       <PageHeader title={"Add New Client"} />
-      <Alert type={"success"} id={"AlertAddClient"} isOpen={false}>
+      <Alert
+        type={"success"}
+        id={"AlertAddClient"}
+        isOpen={isAlertOpen}
+        onDismiss={() => setIsAlertOpen(false)}
+      >
         Success! A new client has been added to the database.
       </Alert>
       <MainLayout>
@@ -19,6 +28,10 @@ export default function AddClient() {
           extraClasses={"form--add-client"}
           formId={"formAddNewClient"}
           name={"formAddNewClient"}
+          onClickSubmit={() => {
+            setIsAlertOpen(true);
+            router.push("/clients/add-client");
+          }}
         />
       </MainLayout>
     </>

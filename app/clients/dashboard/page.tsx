@@ -1,7 +1,7 @@
+import Link from "next/link";
 import MainLayout from "@/app/main/layout";
 import PageHeader from "@/components/PageHeader";
-import ClientsDirectory from "@/components/Clients";
-import Link from "next/link";
+import ClientsDirectory from "@/components/Clients/Directory";
 
 export default function Dashboard() {
   return (

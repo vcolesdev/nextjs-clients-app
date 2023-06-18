@@ -1,6 +1,6 @@
 import React from "react";
-import { ButtonProps } from "@/api/_interfaces";
 import classnames from "classnames";
+import { ButtonProps } from "@/api/_interfaces";
 
 export default function useButton({ ...options }: ButtonProps) {
   let {
@@ -34,7 +34,7 @@ export default function useButton({ ...options }: ButtonProps) {
       [`${activeColor ? `active:bg-${activeColor}` : "active:bg-gray-600"}`]:
         true,
       [`${
-        activeTextColor ? `active:bg-${activeTextColor}` : "active:text-white"
+        activeTextColor ? `active:text-${activeTextColor}` : "active:text-white"
       }`]: true,
       [`${color ? `bg-${color}` : "bg-gray-50"}`]: true,
       [`${hoverColor ? `hover:bg-${hoverColor}` : "hover:bg-gray-500"}`]: true,

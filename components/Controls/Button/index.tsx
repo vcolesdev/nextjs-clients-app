@@ -1,42 +1,38 @@
 import React from "react";
-import Link from "next/link";
-import useButton from "@/api/hooks/useButton";
-import { ButtonProps } from "@/api/_interfaces";
+import CustomButton from "@/components/Controls/Button/Custom";
 
-export default function CustomButton({ ...props }: ButtonProps) {
-  let { buttonContent, buttonClasses, options } = useButton(props);
-
+export default function Button({
+  extraClasses,
+  label,
+  onClick,
+  primary,
+  secondary
+}: {
+  extraClasses?: string;
+  label?: string;
+  onClick?: () => void;
+  primary?: boolean;
+  secondary?: boolean;
+}) {
+  const btnProps = {
+    activeColor: primary ? "violet-600" : secondary ? "slate-700" : "gray-700",
+    activeTextColor: primary ? "white" : secondary ? "white" : "white",
+    color: primary ? "violet-50" : secondary ? "slate-100" : "gray-100",
+    hoverColor: primary ? "violet-500" : secondary ? "slate-200" : "gray-200",
+    hoverTextColor: primary ? "white" : secondary ? "slate-700" : "gray-700",
+    textColor: primary ? "violet-500" : secondary ? "slate-600" : "gray-600"
+  };
   return (
-    <>
-      {options.isNextLinkButton ? (
-        <Link
-          className={
-            buttonClasses + (options.extraClasses ? options.extraClasses : "")
-          }
-          href={options.href ? options.href : "/"}
-        >
-          {buttonContent ? buttonContent : "Custom button"}
-        </Link>
-      ) : options.isLinkButton ? (
-        <a
-          href={options.href ? options.href : "#"}
-          className={
-            buttonClasses + (options.extraClasses ? options.extraClasses : "")
-          }
-        >
-          {buttonContent ? buttonContent : "Custom Button"}
-        </a>
-      ) : (
-        <button
-          className={`${buttonClasses} ${
-            options.extraClasses ? options.extraClasses : ""
-          }`}
-          onClick={options.onClick ? options.onClick : null}
-          type={options.type ? options.type : "button"}
-        >
-          {buttonContent ? buttonContent : "Custom Button"}
-        </button>
-      )}
-    </>
+    <CustomButton
+      activeColor={btnProps.activeColor}
+      activeTextColor={btnProps.activeTextColor}
+      color={btnProps.color}
+      extraClasses={extraClasses ? extraClasses : ""}
+      hoverColor={btnProps.hoverColor}
+      hoverTextColor={btnProps.hoverTextColor}
+      label={label ? label : "Custom Button"}
+      onClick={onClick}
+      textColor={btnProps.textColor}
+    />
   );
 }

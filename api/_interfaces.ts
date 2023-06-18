@@ -48,7 +48,7 @@ export interface ButtonProps {
   extraClasses?: string;
   color?: string;
   hasIcon?: boolean;
-  href?: string;
+  href?: any;
   hoverColor?: string;
   hoverTextColor?: string;
   icon?: React.ReactNode | any;

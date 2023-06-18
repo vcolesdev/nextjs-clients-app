@@ -43,8 +43,9 @@ export default function useUpdateClient(
       "mt-2 px-3 py-2 rounded-lg bg-red-50 text-red-600 text-sm tracking-tight"
   };
 
-  //  Modal
+  //  Modals
   const [isOpen, setIsOpen] = React.useState(false);
+  const [viewComments, setViewComments] = React.useState(false);
 
   // Mutation triggers
   const [updateClient, {}] = useUpdateClientMutation();
@@ -111,6 +112,8 @@ export default function useUpdateClient(
     formState,
     register,
     setIsOpen,
-    setValue
+    setValue,
+    setViewComments,
+    viewComments
   };
 }

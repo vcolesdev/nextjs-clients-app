@@ -10,6 +10,7 @@ export default function Alert({
   children,
   id,
   isOpen,
+  onDismiss,
   style,
   type
 }: {
@@ -17,6 +18,7 @@ export default function Alert({
   children: React.ReactNode;
   id?: string;
   isOpen?: boolean;
+  onDismiss?: any;
   style?: React.CSSProperties;
   type: string;
 }) {
@@ -70,9 +72,7 @@ export default function Alert({
                 ? "text-red-500 focus:ring-red-400"
                 : ""
             }`}
-            onClick={() => {
-              console.log("Dismissed alert");
-            }}
+            onClick={onDismiss}
             type={"button"}
           >
             <span className={"sr-only"}>Dismiss</span>
