@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function TBody({
+export default function TableBody({
   children,
   tbodyClasses
 }: {

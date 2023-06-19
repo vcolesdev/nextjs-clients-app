@@ -2,10 +2,10 @@ import React from "react";
 
 // Custom Provider component to wrap the app in the Redux store.
 import { Providers } from "@/redux/providers";
-import { AppProviders } from "@/api/providers/appProviders";
 
 // Global styles
 import "../assets/styles/globals.scss";
+import "@/node_modules/rsuite/dist/rsuite-no-reset.min.css";
 
 // App component
 import App from "@/components/App";
@@ -26,9 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <AppProviders>
-            <App>{children}</App>
-          </AppProviders>
+          <App>{children}</App>
         </Providers>
       </body>
     </html>

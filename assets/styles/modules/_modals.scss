@@ -1,0 +1,62 @@
+/* _modals.scss */
+
+// @todo - add styles for the following elements.
+// @todo - move styles into own file, organize scss.
+.rdw-editor-main,
+#ViewClientComments {
+  h1, h2, h3, h4, p, ul, ol, blockquote, img, video {
+    @apply block mb-4;
+  }
+
+  h1, h2, h3, h4, p, li {
+    @apply tracking-tight text-gray-600;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-semibold;
+  }
+
+  h1 {
+    @apply text-2xl;
+  }
+
+  h2 {
+    @apply text-xl;
+  }
+
+  h3 {
+    @apply text-lg;
+  }
+
+  h4 {
+    @apply text-base;
+  }
+
+  p {
+    @apply text-sm;
+  }
+
+  strong {
+    @apply font-bold;
+  }
+
+  li {
+    @apply block;
+  }
+
+  a {
+      @apply inline-block;
+  }
+
+  code {
+    @apply font-mono;
+  }
+
+  pre {
+    @apply font-mono;
+  }
+
+  hr {
+    @apply my-6;
+  }
+}

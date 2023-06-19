@@ -27,7 +27,7 @@ export default function Button({
       activeColor={btnProps.activeColor}
       activeTextColor={btnProps.activeTextColor}
       color={btnProps.color}
-      extraClasses={extraClasses ? extraClasses : ""}
+      extraClasses={`${extraClasses ? extraClasses : ""}`}
       hoverColor={btnProps.hoverColor}
       hoverTextColor={btnProps.hoverTextColor}
       label={label ? label : "Custom Button"}

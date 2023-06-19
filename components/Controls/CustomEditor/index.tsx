@@ -9,6 +9,7 @@ import {
   convertToRaw
 } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
+import draftToMarkdown from "draftjs-to-markdown";
 import "@/node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 /**
@@ -36,6 +37,7 @@ const CustomEditor = (props: any) => {
     setEditorState(editorState);
     return props.onChange(
       draftToHtml(convertToRaw(editorState.getCurrentContent()))
+      //draftToMarkdown(convertToRaw(editorState.getCurrentContent()))
     );
   };
 

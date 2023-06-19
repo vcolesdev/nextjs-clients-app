@@ -1,4 +1,5 @@
 import React from "react";
+import Text from "@/components/Text";
 
 export default function ContentHeader({
   containerClasses,
@@ -11,13 +12,13 @@ export default function ContentHeader({
 }) {
   return (
     <div className={`px-4 sm:px-0 ${containerClasses ? containerClasses : ""}`}>
-      <h3 className="font-semibold leading-7 text-gray-800 tracking-tight">
+      <h3 className="mb-2 font-semibold text-lg leading-7 text-slate-700 tracking-tight">
         {headingText ? headingText : "Content Header"}
       </h3>
       {subheadingText && (
-        <p className="mt-1 max-w-2xl leading-6 text-gray-500 text-sm">
-          {subheadingText ? subheadingText : "Content subheading."}
-        </p>
+        <div className="mt-1 max-w-2xl leading-6">
+          <Text>{subheadingText ? subheadingText : "Content subheading."}</Text>
+        </div>
       )}
     </div>
   );

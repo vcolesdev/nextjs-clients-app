@@ -2,17 +2,10 @@ import React from "react";
 import CustomEditor from "@/components/Controls/CustomEditor";
 import CustomButton from "@/components/Controls/Button/Custom";
 import { Controller } from "react-hook-form";
-import {
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay
-} from "@chakra-ui/react";
+import { Modal } from "rsuite";
 
 export default function ModalClientComments({
+  client,
   control,
   isOpen,
   modalHeadingText,
@@ -21,56 +14,26 @@ export default function ModalClientComments({
   onClick,
   size
 }: {
+  client?: {} | any;
   control?: any;
   isOpen: boolean;
   modalHeadingText?: string;
   modalType: "addComments" | "editComments" | "viewComments";
   onClick?: () => void;
   onClose: () => void;
-  size?: "full" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl";
+  size?: "full" | "lg" | "md" | "sm" | "xs";
 }) {
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} size={size ? size : "md"}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader className={"tracking-tight"}>
-            {modalHeadingText ? modalHeadingText : "Client Comments"}
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <div className={"mb-4"}>
-              {modalType === "editComments" ? (
-                <>
-                  <p className={"text-sm text-gray-700 tracking-tight"}>
-                    Edit comments about client using the textarea below.
-                  </p>
-                  {/* Comments */}
-                  <div>
-                    <Controller
-                      control={control}
-                      name={"comments"}
-                      render={({ field }) => (
-                        <CustomEditor
-                          editorClasses={"p-4 text-sm text-gray-600"}
-                          editorState={field.value}
-                          onChange={field.onChange}
-                          value={field.value}
-                          wrapperClasses={"border border-gray-300"}
-                        />
-                      )}
-                    />
-                  </div>
-                </>
-              ) : modalType === "viewComments" ? (
-                <p className={"text-sm text-gray-700 tracking-tight"}>
-                  User input comments for this client:
-                </p>
-              ) : modalType === "addComments" ? (
-                <>
-                  <p className={"text-sm text-gray-700 tracking-tight"}>
-                    Add client comments using the WYSIWYG editor below.
-                  </p>
+      <Modal open={isOpen} onClose={onClose} size={size ? size : "md"}>
+        <Modal.Header className={"tracking-tight"}>
+          {modalHeadingText ? modalHeadingText : "Client Comments"}
+        </Modal.Header>
+        <Modal.Body>
+          <div className={"mb-4"}>
+            {modalType === "editComments" ? (
+              <>
+                <div id={"EditClientComments"}>
                   <Controller
                     control={control}
                     name={"comments"}
@@ -84,35 +47,55 @@ export default function ModalClientComments({
                       />
                     )}
                   />
-                </>
-              ) : (
-                <div className={"text-sm text-gray-700 tracking-tight"}>
-                  Modal content here...
                 </div>
-              )}
-            </div>
-          </ModalBody>
-          <ModalFooter>
-            <CustomButton
-              activeColor={"violet-600"}
-              activeTextColor={"white"}
-              color={"violet-50"}
-              hoverColor={"violet-500"}
-              hoverTextColor={"white"}
-              label={
-                modalType === "editComments"
-                  ? "Save Comments"
-                  : modalType === "viewComments"
-                  ? "Close Modal"
-                  : modalType === "addComments"
-                  ? "Add Comments"
-                  : "Close"
-              }
-              onClick={onClick}
-              textColor={"violet-500"}
-            />
-          </ModalFooter>
-        </ModalContent>
+              </>
+            ) : modalType === "viewComments" ? (
+              <div id={"ViewClientComments"}>
+                <div dangerouslySetInnerHTML={{ __html: client?.comments }} />
+              </div>
+            ) : modalType === "addComments" ? (
+              <div id={"AddClientComments"}>
+                <Controller
+                  control={control}
+                  name={"comments"}
+                  render={({ field }) => (
+                    <CustomEditor
+                      editorClasses={"p-4 text-sm text-gray-600"}
+                      editorState={field.value}
+                      onChange={field.onChange}
+                      value={field.value}
+                      wrapperClasses={"border border-gray-300"}
+                    />
+                  )}
+                />
+              </div>
+            ) : (
+              <div className={"text-sm text-gray-700 tracking-tight"}>
+                Modal content here...
+              </div>
+            )}
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <CustomButton
+            activeColor={"violet-600"}
+            activeTextColor={"white"}
+            color={"violet-50"}
+            hoverColor={"violet-500"}
+            hoverTextColor={"white"}
+            label={
+              modalType === "editComments"
+                ? "Save Comments"
+                : modalType === "viewComments"
+                ? "Close Modal"
+                : modalType === "addComments"
+                ? "Add Comments"
+                : "Close"
+            }
+            onClick={onClick}
+            textColor={"violet-500"}
+          />
+        </Modal.Footer>
       </Modal>
     </>
   );

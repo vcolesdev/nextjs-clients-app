@@ -32,7 +32,7 @@
       "lastName": "Soda",
       "email": "mix.soda@examplemail.com",
       "phone": "",
-      "comments": "<p>This is a comment updated.</p>\n",
+      "comments": "<h3>This is an H3 heading</h3>\n<p>This is an updated comment for testing \"View Comments\" with.</p>\n<p><strong>bold text</strong></p>\n<p><strong><em>italicized text</em></strong></p>\n",
       "id": 4,
       "status": true
     },
@@ -44,6 +44,15 @@
       "status": true,
       "comments": "<p>This client looks and sounds familiar....</p>\n",
       "id": 5
+    },
+    {
+      "firstName": "Lauren",
+      "lastName": "Martinez",
+      "email": "martinez.lauren@examplemail.com",
+      "phone": "9145557674",
+      "status": true,
+      "comments": "<p>These are some example comments for Lauren Martinez.</p>\n",
+      "id": 6
     }
   ]
 }

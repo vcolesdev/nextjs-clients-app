@@ -1,13 +1,14 @@
 import React from "react";
+import ContentHeader from "@/components/Content/Header";
 import Input from "@/components/Controls/Input";
 import Label from "@/components/Form/Label";
 import FormError from "@/components/Form/Error";
 import Button from "@/components/Controls/Button";
+import Toggle from "rsuite/Toggle";
 import FormActions from "@/components/Form/Actions";
 import ModalClientComments from "@/components/Modal/Client/Comments";
-import useAddClient from "@/components/Clients/hooks/useAddClient";
-import { Divider, Switch } from "@chakra-ui/react";
-import ContentHeader from "@/components/Content/Header";
+import useAddClient from "@/components/Clients/forms/AddClient/useAddClient";
+import { Controller } from "react-hook-form";
 
 /**
  * FormAddClient
@@ -52,7 +53,7 @@ export default function FormAddClient({
       name={name}
       onSubmit={handleSubmit(handleAddClient)}
     >
-      <div className="form__fields">
+      <div className="mb-10">
         <ContentHeader
           containerClasses={"mb-6 pb-4 border-b border-gray-200"}
           headingText={"Client Details"}
@@ -82,30 +83,34 @@ export default function FormAddClient({
             </div>
           ))}
         {/* Client Status */}
-        <div className={"mt-6 mb-10"}>
-          <p className={formClasses.label}>Client Status</p>
+        <div className={"mb-10"}>
+          <p className={formClasses.label}>Activate this client?</p>
           <div>
-            <Switch
-              id="isActiveClientAdded"
-              {...register("status", {})}
-              onChange={(e) => e.target.checked === !e.target.checked}
+            <Controller
+              control={control}
+              name="status"
+              render={({ field: { value, onChange } }) => (
+                <Toggle
+                  id={"isActiveClientAdded"}
+                  checked={value}
+                  onChange={onChange}
+                />
+              )}
             />
           </div>
         </div>
-        <div className={"my-6"}>
-          {/* Add Client Comments */}
-          <div className={"my-6"}>
-            <ContentHeader
-              containerClasses={"mb-6 pb-4 border-b border-gray-200"}
-              headingText={"Client Comments"}
-              subheadingText={"Add client comments."}
-            />
-            <Button
-              primary
-              label={"Add Comments"}
-              onClick={() => setIsOpen(true)}
-            />
-          </div>
+        {/* Add Client Comments */}
+        <div className={"mb-10"}>
+          <ContentHeader
+            containerClasses={"mb-6 pb-4 border-b border-gray-200"}
+            headingText={"Client Comments"}
+            subheadingText={"Add client comments."}
+          />
+          <Button
+            primary
+            label={"Add Comments"}
+            onClick={() => setIsOpen(true)}
+          />
         </div>
       </div>
       {/* Form Actions */}
@@ -131,7 +136,7 @@ export default function FormAddClient({
         modalType={"addComments"}
         onClick={() => setIsOpen(false)}
         onClose={() => setIsOpen(false)}
-        size={"xl"}
+        size={"lg"}
       />
     </form>
   );

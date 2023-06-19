@@ -22,9 +22,5 @@ export default function Badge({
   const isWarning = type && type === "warning";
   const isDanger = type && type === "danger";
 
-  return (
-    <div className={badgeClasses}>
-      <span className={"inline-block"}>{label}</span>
-    </div>
-  );
+  return <span className={badgeClasses}>{label}</span>;
 }

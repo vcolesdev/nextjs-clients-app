@@ -8,7 +8,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 ) {
   return (
     <input
-      className={`${props.inputClasses ? props.inputClasses : ""}`}
+      className={`border border-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-violet-50 focus:ring-violet-500 ${
+        props.inputClasses ? props.inputClasses : ""
+      }`}
       id={props.id}
       name={props.name}
       onChange={props.onChange}

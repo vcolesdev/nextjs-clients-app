@@ -27,18 +27,22 @@ export default function Navigation() {
       <NavMenu menuClasses={"nav__menu"}>
         {navLinks ? (
           navLinks.map((link) => (
-              <NavItem key={link.title} itemClasses={"nav__item"}>
-                <NavLink
-                  linkClasses={`nav__link ${currentRoute === getRoute(link.route) ? activeClasses : linkClasses}`}
-                  href={link.route}
-                  label={link.title}
-                />
-              </NavItem>
-            ))
+            <NavItem key={link.title} itemClasses={"nav__item"}>
+              <NavLink
+                linkClasses={`nav__link ${
+                  currentRoute === getRoute(link.route)
+                    ? activeClasses
+                    : linkClasses
+                }`}
+                href={link.route}
+                label={link.title}
+              />
+            </NavItem>
+          ))
         ) : (
           <p>Error fetching nav items...</p>
         )}
       </NavMenu>
     </NavContainer>
-  )
+  );
 }

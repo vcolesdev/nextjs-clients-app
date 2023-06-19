@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function THead({ items }: { items: any[] }) {
+export default function TableHead({ items }: { items: any[] }) {
   return (
     <thead>
       <tr>
@@ -9,7 +9,7 @@ export default function THead({ items }: { items: any[] }) {
             <th
               key={item}
               scope="col"
-              className="py-3.5 pl-4 pr-3 text-left font-medium text-gray-700 text-sm tracking-tight sm:pl-0 last:text-right"
+              className="py-3.5 pl-4 pr-3 text-left font-bold text-slate-600 text-xs uppercase tracking-tight sm:pl-0 last:text-right"
             >
               {item}
             </th>

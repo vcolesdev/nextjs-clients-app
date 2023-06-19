@@ -3,11 +3,12 @@ import Input from "@/components/Controls/Input";
 import Label from "@/components/Form/Label";
 import FormError from "@/components/Form/Error";
 import Button from "@/components/Controls/Button";
+import Toggle from "rsuite/Toggle";
 import FormActions from "@/components/Form/Actions";
 import ContentHeader from "@/components/Content/Header";
 import ModalClientComments from "@/components/Modal/Client/Comments";
-import useUpdateClient from "@/components/Clients/hooks/useUpdateClient";
-import { Divider, Switch } from "@chakra-ui/react";
+import useUpdateClient from "@/components/Clients/forms/UpdateClient/useUpdateClient";
+import { Controller } from "react-hook-form";
 
 /**
  * FormUpdateClient
@@ -63,7 +64,7 @@ export default function FormUpdateClient({
           name={name}
           onSubmit={handleSubmit(handleUpdateClient)}
         >
-          <div className="form__fields">
+          <div className="mb-10">
             {fields &&
               fields.map((field) => (
                 <div key={field.id} className="mb-5">
@@ -90,18 +91,24 @@ export default function FormUpdateClient({
                 </div>
               ))}
             {/* Client Status */}
-            <div className={"mt-6 mb-10"}>
-              <p className={formClasses.label}>Client Status</p>
+            <div className={"mb-10"}>
+              <p className={formClasses.label}>Activate this client?</p>
               <div>
-                <Switch
-                  id="isActiveClientUpdated"
-                  {...register("status", {})}
-                  onChange={(e) => e.target.checked === !e.target.checked}
+                <Controller
+                  control={control}
+                  name="status"
+                  render={({ field: { value, onChange } }) => (
+                    <Toggle
+                      id={"isActiveClientUpdated"}
+                      checked={value}
+                      onChange={onChange}
+                    />
+                  )}
                 />
               </div>
             </div>
             {/* Edit Client Comments */}
-            <div className={"mb-10 mt-6"}>
+            <div className={"mb-10"}>
               <ContentHeader
                 containerClasses={"mb-6 pb-4 border-b border-gray-200"}
                 headingText={"Client Comments"}
@@ -145,17 +152,18 @@ export default function FormUpdateClient({
             modalType={"editComments"}
             onClick={() => setIsOpen(false)}
             onClose={() => setIsOpen(false)}
-            size={"xl"}
+            size={"lg"}
           />
           {/* View Comments Modal */}
           <ModalClientComments
+            client={client && client}
             control={control}
             isOpen={viewComments}
             modalHeadingText={"View Client Comments"}
             modalType={"viewComments"}
             onClick={() => setViewComments(false)}
             onClose={() => setViewComments(false)}
-            size={"xl"}
+            size={"lg"}
           />
         </form>
       )}

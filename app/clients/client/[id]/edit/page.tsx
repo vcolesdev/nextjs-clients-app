@@ -4,12 +4,14 @@ import React from "react";
 import MainLayout from "@/app/main/layout";
 import PageHeader from "@/components/PageHeader";
 import Alert from "@/components/Alert";
-import Badge from "@/components/Badge";
-import FormUpdateClient from "@/components/Clients/forms/UpdateClient";
-import { Spinner } from "@chakra-ui/react";
-import { useGetClientQuery } from "@/redux/features/clientsApi";
 import ContentHeader from "@/components/Content/Header";
+import DList from "@/components/DList/List";
+import DListItem from "@/components/DList/Item";
+import FormUpdateClient from "@/components/Clients/forms/UpdateClient";
+import Loader from "rsuite/Loader";
+import { useGetClientQuery } from "@/redux/features/clientsApi";
 import { useRouter } from "next/navigation";
+import { useClientDetails } from "@/api/hooks/useClientDetails";
 
 export default function UpdateClient({ params }: { params: { id: string } }) {
   const {
@@ -20,12 +22,28 @@ export default function UpdateClient({ params }: { params: { id: string } }) {
     isSuccess
   } = useGetClientQuery(params.id);
 
+  // Next.js router
   const router = useRouter();
+
+  // Handle alert
   const [isAlertOpen, setIsAlertOpen] = React.useState(false);
+
+  // Client details
+  const { dListItems } = useClientDetails({ client });
+
+  // Definition list classes
+  const dClasses = {
+    listContainer: `mt-6 border-t border-gray-100 mb-10`
+  };
 
   return (
     <>
-      <PageHeader title={"Update Client"} />
+      <div className={"flex relative items-center"}>
+        <PageHeader title={`Update Client`} />
+        <span className={"mb-4 ml-4 text-xl text-gray-500 font-light"}>
+          {client && `${client.firstName} ${client.lastName}`}
+        </span>
+      </div>
       <Alert
         type={"success"}
         id={"AlertUpdateClient"}
@@ -35,7 +53,7 @@ export default function UpdateClient({ params }: { params: { id: string } }) {
         <span>Success! Client has been successfully updated.</span>
       </Alert>
       <MainLayout>
-        {isFetching && <Spinner size="lg" />}
+        {isFetching && <Loader size="lg" />}
         {isError && <p>Error: ${error.toString()}</p>}
         {isSuccess && client && (
           <>
@@ -43,54 +61,19 @@ export default function UpdateClient({ params }: { params: { id: string } }) {
               headingText={"Client Information"}
               subheadingText={"Personal details and information."}
             />
-            <div className="mt-6 border-t border-gray-100 mb-10">
-              <dl className="divide-y divide-gray-100">
-                {/* Full name */}
-                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt className="text-sm tracking-tight font-medium leading-6 text-gray-900">
-                    Full name
-                  </dt>
-                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {client.firstName} {client.lastName}
-                  </dd>
-                </div>
-                {/* Email Address */}
-                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt className="text-sm tracking-tight font-medium leading-6 text-gray-900">
-                    Email Address
-                  </dt>
-                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {client.email}
-                  </dd>
-                </div>
-                {/* Phone Number */}
-                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt className="text-sm tracking-tight font-medium leading-6 text-gray-900">
-                    Phone Number
-                  </dt>
-                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {client.phone ? client.phone : "–"}
-                  </dd>
-                </div>
-                {/* Status */}
-                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt className="text-sm tracking-tight font-medium leading-6 text-gray-900">
-                    Status
-                  </dt>
-                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {client.status ? (
-                      <Badge label={"Active"} type={"success"} />
-                    ) : (
-                      <Badge label={"Inactive"} type={"danger"} />
-                    )}
-                  </dd>
-                </div>
-              </dl>
+            <div className={dClasses.listContainer}>
+              <DList>
+                {dListItems.map((item, index) => (
+                  <DListItem key={index} title={item.title}>
+                    {item.desc}
+                  </DListItem>
+                ))}
+              </DList>
             </div>
           </>
         )}
         <ContentHeader
-          containerClasses={"py-6 border-b border-gray-100 mb-10"}
+          containerClasses={"mb-6 py-6 border-b border-gray-100"}
           headingText={"Update Client Form"}
           subheadingText={
             "Update the personal information and details for this client."

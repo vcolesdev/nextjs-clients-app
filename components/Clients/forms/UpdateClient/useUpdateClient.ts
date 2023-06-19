@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { TClient } from "@/api/_types";
+import { useGetFields } from "@/api/hooks/useGetFields";
+import { useCustomForm } from "@/api/hooks/useCustomForm";
 import {
   useGetClientQuery,
   useUpdateClientMutation
 } from "@/redux/features/clientsApi";
-import { useGetFields } from "@/api/hooks/useGetFields";
 
 /**
  * useUpdateClient.ts
@@ -18,7 +19,6 @@ export default function useUpdateClient(
   clientId: string | undefined
 ) {
   // Form
-  const { fields } = useGetFields();
   const {
     control,
     formState,
@@ -31,21 +31,15 @@ export default function useUpdateClient(
     setValue
   } = useForm();
 
+  // Get form fields
+  const { fields } = useGetFields();
+
   // Form styles
-  const formClasses = {
-    label:
-      "inline-block mb-1.5 text-sm font-medium tracking-tight text-gray-700",
-    input:
-      "block w-full px-3 py-3 rounded-md border border-solid border-gray-300 " +
-      "focus:border-violet-300 focus:ring focus:ring-violet-200 " +
-      "focus:ring-opacity-50 text-sm tracking-tight text-gray-700",
-    error:
-      "mt-2 px-3 py-2 rounded-lg bg-red-50 text-red-600 text-sm tracking-tight"
-  };
+  const { formStyles: formClasses } = useCustomForm();
 
   //  Modals
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [viewComments, setViewComments] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [viewComments, setViewComments] = useState(false);
 
   // Mutation triggers
   const [updateClient, {}] = useUpdateClientMutation();

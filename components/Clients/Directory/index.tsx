@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import TableContainer from "@/components/Table/TableContainer";
-import THead from "@/components/Table/THead";
-import TBody from "@/components/Table/TBody";
+import TableContainer from "@/components/Table/Container/TableContainer";
+import TableHead from "@/components/Table/Head";
+import TableBody from "@/components/Table/Body";
 import TClientRow from "@/components/Table/TClientRow";
-import { Spinner } from "@chakra-ui/react";
+import Loader from "rsuite/Loader";
 import { TClient } from "@/api/_types";
 import { useGetClientsListQuery } from "@/redux/features/clientsApi";
 
@@ -18,29 +18,29 @@ export default function ClientsDirectory() {
     isSuccess
   } = useGetClientsListQuery();
 
+  const items = [
+    "ID",
+    "Full Name",
+    "Email Address",
+    "Phone",
+    "Status",
+    "Date Added",
+    "Actions"
+  ];
+
   return (
     <>
-      {isLoading && <Spinner size="lg" />}
+      {isLoading && <Loader size="lg" />}
       {isError && <p>{error.toString()}</p>}
       {isSuccess && (
         <TableContainer>
-          <THead
-            items={[
-              "ID",
-              "Full Name",
-              "Email",
-              "Phone",
-              "Status",
-              "Date Added",
-              "Actions"
-            ]}
-          />
-          <TBody>
+          <TableHead items={items} />
+          <TableBody>
             {clients &&
               clients.map((client: TClient) => (
                 <TClientRow client={client} key={client.id} />
               ))}
-          </TBody>
+          </TableBody>
         </TableContainer>
       )}
     </>

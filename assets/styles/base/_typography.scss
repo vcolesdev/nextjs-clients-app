@@ -1,0 +1,35 @@
+/* _typography.scss */
+
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: $font-body !important;
+  font-size: 1rem;
+  font-weight: normal;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Universal transitions for controls */
+a,
+input,
+button,
+textarea {
+  @apply
+    ease-in-out
+    duration-200
+    transition;
+}
+
+/* Universal focus styles */
+button {
+  @apply
+    focus:outline-none
+    focus:ring-2
+    focus:ring-offset-2
+    focus:ring-offset-violet-50
+    focus:ring-violet-500;
+}
