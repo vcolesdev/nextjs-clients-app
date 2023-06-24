@@ -1,5 +1,5 @@
 import MainLayout from "@/app/main/layout";
-import PageHeader from "../components/PageHeader";
+import { PageHeader } from "@/components/Page";
 
 export default function Home() {
   return (

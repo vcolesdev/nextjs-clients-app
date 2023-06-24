@@ -1,8 +1,8 @@
 import Link from "next/link";
 import MainLayout from "@/app/main/layout";
-import PageHeader from "@/components/PageHeader";
-import ClientsDirectory from "@/components/Clients/Directory";
-import Text from "@/components/Text";
+import { ClientsDirectory } from "@/components/Clients";
+import { PageHeader } from "@/components/Page";
+import { Text } from "@/components/Typography";
 
 export default function Dashboard() {
   return (

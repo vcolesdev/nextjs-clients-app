@@ -1,17 +1,16 @@
 "use client";
 
 import React from "react";
-import MainLayout from "@/app/main/layout";
-import PageHeader from "@/components/PageHeader";
-import Alert from "@/components/Alert";
-import ContentHeader from "@/components/Content/Header";
-import DList from "@/components/DList/List";
-import DListItem from "@/components/DList/Item";
-import FormUpdateClient from "@/components/Clients/forms/UpdateClient";
 import Loader from "rsuite/Loader";
+import MainLayout from "@/app/main/layout";
+import { PageHeader } from "@/components/Page";
+import { Alert } from "@/components/Alert/Alert";
+import { ContentHeader } from "@/components/Content";
+import { DList, DListItem } from "@/components/DList";
+import { FormUpdateClient } from "@/components/Clients/Forms";
+import { useClientDetails } from "@/api/hooks/clients/useClientDetails";
 import { useGetClientQuery } from "@/redux/features/clientsApi";
 import { useRouter } from "next/navigation";
-import { useClientDetails } from "@/api/hooks/useClientDetails";
 
 export default function UpdateClient({ params }: { params: { id: string } }) {
   const {

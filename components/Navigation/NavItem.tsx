@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function NavItem({
+export function NavItem({
   children,
   itemClasses
 }: {

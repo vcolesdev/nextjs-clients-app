@@ -1,10 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import Badge from "@/components/Badge";
-import Text from "@/components/Text";
-import IconPencilSquare from "@/components/Icons/PencilSquare";
-import TableRow from "@/components/Table/Row";
-import TableCell from "@/components/Table/Cell";
+import { Badge } from "@/components/Badge/Badge";
+import { IconPencilSquare } from "@/components/Icons/IconPencilSquare";
+import { TableCell, TableRow } from "@/components/Table";
+import { Text } from "@/components/Typography";
 import { TClient } from "@/api/_types";
 
 const BtnEditClient = ({ href }: { href: string }) => {
@@ -22,7 +21,7 @@ const BtnEditClient = ({ href }: { href: string }) => {
   );
 };
 
-export default function TClientRow({
+export function TClientRow({
   client,
   trClasses
 }: {

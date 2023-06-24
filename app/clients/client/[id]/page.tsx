@@ -1,16 +1,15 @@
 "use client";
 
 import React from "react";
-import MainLayout from "@/app/main/layout";
-import PageHeader from "@/components/PageHeader";
 import Link from "next/link";
-import ContentHeader from "@/components/Content/Header";
-import DList from "@/components/DList/List";
-import DListItem from "@/components/DList/Item";
 import Loader from "rsuite/Loader";
+import MainLayout from "@/app/main/layout";
+import { PageHeader } from "@/components/Page";
+import { ContentHeader } from "@/components/Content";
+import { DList, DListItem } from "@/components/DList";
+import { useClient } from "@/api/hooks/clients/useClient";
+import { useClientDetails } from "@/api/hooks/clients/useClientDetails";
 import { useGetClientQuery } from "@/redux/features/clientsApi";
-import { useClientDetails } from "@/api/hooks/useClientDetails";
-import { useClient } from "@/api/hooks/useClient";
 
 export default function Client({ params }: { params: { id: string } }) {
   const {

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function AppBarContainer({
+export function AppBarContainer({
   children,
   extraClasses
 }: {

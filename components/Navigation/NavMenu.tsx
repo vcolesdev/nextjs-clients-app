@@ -1,12 +1,11 @@
 import React from "react";
 
-export default function NavMenu({ children, menuClasses }: {
-  children: React.ReactNode,
-  menuClasses?: string
+export function NavMenu({
+  children,
+  menuClasses
+}: {
+  children: React.ReactNode;
+  menuClasses?: string;
 }) {
-  return (
-    <ul className={`${menuClasses}`}>
-      {children}
-    </ul>
-  );
+  return <ul className={`${menuClasses}`}>{children}</ul>;
 }

@@ -8,7 +8,7 @@ import "../assets/styles/globals.scss";
 import "@/node_modules/rsuite/dist/rsuite-no-reset.min.css";
 
 // App component
-import App from "@/components/App";
+import { App } from "@/components/App";
 
 // Our App's metadata, used for SEO and injected into the <head>
 export const metadata = {

@@ -2,9 +2,9 @@
 
 import React from "react";
 import MainLayout from "@/app/main/layout";
-import PageHeader from "@/components/PageHeader";
-import Alert from "@/components/Alert";
-import FormAddClient from "@/components/Clients/forms/AddClient";
+import { Alert } from "@/components/Alert";
+import { FormAddClient } from "@/components/Clients/Forms";
+import { PageHeader } from "@/components/Page";
 import { useRouter } from "next/navigation";
 
 export default function AddClient() {

@@ -1,0 +1,5 @@
+# Ignored folders
+
+/.next
+/node_modules
+/public
