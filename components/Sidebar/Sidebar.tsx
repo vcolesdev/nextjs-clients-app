@@ -5,7 +5,7 @@ export function Sidebar({ sidebarClasses }: { sidebarClasses?: string }) {
         sidebarClasses && sidebarClasses
       }`}
     >
-      <div className={"sidebar__content"}>
+      <div className="sidebar__content">
         <div>
           <p>Widgets here...</p>
         </div>

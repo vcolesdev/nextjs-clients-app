@@ -38,15 +38,15 @@ export function Alert({
           : ""
       } ${alertClasses ? alertClasses : ""}`}
       id={id ? id : ""}
-      role={"alert"}
+      role="alert"
       style={{ display: isOpen ? "flex" : "none", ...style }}
     >
-      <div className={"flex"}>
-        <div className={"flex-shrink-0"}>
+      <div className="flex">
+        <div className="flex-shrink-0">
           {type === "success" && (
             <CheckCircleIcon
-              className={"h-5 w-5 text-green-400"}
-              aria-hidden={"true"}
+              className="h-5 w-5 text-green-400"
+              aria-hidden="true"
             />
           )}
           {type === "warning" && (
@@ -57,12 +57,12 @@ export function Alert({
           )}
         </div>
       </div>
-      <div className={"ml-3"}>{children}</div>
-      <div className={"ml-auto pl-3"}>
-        <div className={"-mx-1.5 -my-1.5"}>
+      <div className="ml-3">{children}</div>
+      <div className="ml-auto pl-3">
+        <div className="-mx-1.5 -my-1.5">
           <button
-            aria-label={"Dismiss"}
-            data-dismiss={"alert"}
+            aria-label="Dismiss"
+            data-dismiss="alert"
             className={`inline-flex mt-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-50 ${
               isSuccess
                 ? "text-green-500 focus:ring-green-400"
@@ -73,10 +73,10 @@ export function Alert({
                 : ""
             }`}
             onClick={onDismiss}
-            type={"button"}
+            type="button"
           >
-            <span className={"sr-only"}>Dismiss</span>
-            <XMarkIcon className={"h-5 w-5"} aria-hidden={"true"} />
+            <span className="sr-only">Dismiss</span>
+            <XMarkIcon className="h-5 w-5" aria-hidden="true" />
           </button>
         </div>
       </div>

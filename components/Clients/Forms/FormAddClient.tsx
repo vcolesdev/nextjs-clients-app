@@ -53,16 +53,16 @@ export function FormAddClient({
     >
       <div className="mb-10">
         <ContentHeader
-          containerClasses={"mb-6 pb-4 border-b border-gray-200"}
-          headingText={"Client Details"}
-          subheadingText={"Fill out client details using the form below."}
+          containerClasses="mb-6 pb-4 border-b border-gray-200"
+          headingText="Client Details"
+          subheadingText="Fill out client details using the form below."
         />
         {fields &&
           fields.map((field) => (
             <div key={field.id} className="mb-5">
               <FormLabel htmlFor={field.id} labelClasses={formClasses.label}>
                 {field.label}{" "}
-                {field.required && <span className={"text-red-500"}>*</span>}
+                {field.required && <span className="text-red-500">*</span>}
               </FormLabel>
               <Input
                 inputClasses={formClasses.input}
@@ -81,7 +81,7 @@ export function FormAddClient({
             </div>
           ))}
         {/* Client Status */}
-        <div className={"mb-10"}>
+        <div className="mb-10">
           <p className={formClasses.label}>Activate this client?</p>
           <div>
             <Controller
@@ -89,7 +89,7 @@ export function FormAddClient({
               name="status"
               render={({ field: { value, onChange } }) => (
                 <Toggle
-                  id={"isActiveClientAdded"}
+                  id="isActiveClientAdded"
                   checked={value}
                   onChange={onChange}
                 />
@@ -98,15 +98,15 @@ export function FormAddClient({
           </div>
         </div>
         {/* Add Client Comments */}
-        <div className={"mb-10"}>
+        <div className="mb-10">
           <ContentHeader
-            containerClasses={"mb-6 pb-4 border-b border-gray-200"}
-            headingText={"Client Comments"}
-            subheadingText={"Add client comments."}
+            containerClasses="mb-6 pb-4 border-b border-gray-200"
+            headingText="Client Comments"
+            subheadingText="Add client comments."
           />
           <Button
             primary
-            label={"Add Comments"}
+            label="Add Comments"
             onClick={() => setIsOpen(true)}
           />
         </div>
@@ -114,15 +114,15 @@ export function FormAddClient({
       {/* Form Actions */}
       <div>
         <ContentHeader
-          containerClasses={"pb-4 border-b border-gray-200"}
-          headingText={"Form Actions"}
-          subheadingText={"Submit, reset, or cancel form submission."}
+          containerClasses="pb-4 border-b border-gray-200"
+          headingText="Form Actions"
+          subheadingText="Submit, reset, or cancel form submission."
         />
         <FormActions
-          cancelHref={"/clients"}
-          labelCancel={"Cancel"}
-          labelReset={"Clear Fields"}
-          labelSubmit={"Add New Client"}
+          cancelHref="/clients"
+          labelCancel="Cancel"
+          labelReset="Clear Fields"
+          labelSubmit="Add New Client"
           onClickSubmit={onClickSubmit}
         />
       </div>
@@ -130,11 +130,11 @@ export function FormAddClient({
       <ModalClientComments
         control={control}
         isOpen={isOpen}
-        modalHeadingText={"Add Comments"}
-        modalType={"addComments"}
+        modalHeadingText="Add Comments"
+        modalType="addComments"
         onClick={() => setIsOpen(false)}
         onClose={() => setIsOpen(false)}
-        size={"lg"}
+        size="lg"
       />
     </form>
   );

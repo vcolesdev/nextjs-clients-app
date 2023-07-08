@@ -22,14 +22,14 @@ export function ActionButton({
       >
         {(iconPosition === "left" && (
           <>
-            <span className={"inline-block mr-2"}>{children}</span>
-            <span className={"font-semibold text-gray-600"}>{label}</span>
+            <span className="inline-block mr-2">{children}</span>
+            <span className="font-semibold text-gray-600">{label}</span>
           </>
         )) ||
           (iconPosition === "right" && (
             <>
-              <span className={"font-semibold text-gray-600"}>{label}</span>
-              <span className={"inline-block ml-2"}>{children}</span>
+              <span className="font-semibold text-gray-600">{label}</span>
+              <span className="inline-block ml-2">{children}</span>
             </>
           ))}
       </button>
@@ -41,7 +41,7 @@ export function ActionButton({
           buttonClasses && buttonClasses
         }`}
       >
-        <span className={"font-semibold text-gray-600"}>{label}</span>
+        <span className="font-semibold text-gray-600">{label}</span>
       </button>
     );
   }

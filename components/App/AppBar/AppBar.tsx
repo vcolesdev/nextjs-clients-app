@@ -8,15 +8,15 @@ import { Navigation } from "@/components/Navigation";
 
 export function AppBar() {
   return (
-    <AppBarContainer extraClasses={"appbar"}>
-      <div className={"flex"}>
-        <Link href={"/"}>
-          <Logo text={"Clients App"} />
+    <AppBarContainer extraClasses="appbar">
+      <div className="flex">
+        <Link href="/">
+          <Logo text="Clients App" />
         </Link>
         <Navigation />
       </div>
       <ActionCenter>
-        <ActionButton label={"Login"} hasIcon={true} iconPosition={"right"}>
+        <ActionButton label="Login" hasIcon={true} iconPosition="right">
           <IconUser />
         </ActionButton>
       </ActionCenter>

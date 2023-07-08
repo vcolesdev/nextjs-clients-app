@@ -15,8 +15,8 @@ export default function AddClient() {
     <>
       <PageHeader title={"Add New Client"} />
       <Alert
-        type={"success"}
-        id={"AlertAddClient"}
+        type="success"
+        id="AlertAddClient"
         isOpen={isAlertOpen}
         onDismiss={() => setIsAlertOpen(false)}
       >
@@ -24,10 +24,10 @@ export default function AddClient() {
       </Alert>
       <MainLayout>
         <FormAddClient
-          action={"/"}
-          extraClasses={"form--add-client"}
-          formId={"formAddNewClient"}
-          name={"formAddNewClient"}
+          action="/"
+          extraClasses="form--add-client"
+          formId="formAddNewClient"
+          name="formAddNewClient"
           onClickSubmit={() => {
             setIsAlertOpen(true);
             router.push("/clients/add-client");

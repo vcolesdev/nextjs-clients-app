@@ -12,7 +12,7 @@ export function FormError({
       className={`form--error flex flex-shrink-0 items-center ${errorClasses}`}
       role="alert"
     >
-      <div className={"inline-block mr-2"}>
+      <div className="inline-block mr-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -28,7 +28,7 @@ export function FormError({
           />
         </svg>
       </div>
-      <p className={"inilne-block"}>{errorLabel} is required</p>
+      <p className="inilne-block">{errorLabel} is required</p>
     </div>
   );
 }

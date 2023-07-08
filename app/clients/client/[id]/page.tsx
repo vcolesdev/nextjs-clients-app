@@ -22,9 +22,7 @@ export default function Client({ params }: { params: { id: string } }) {
 
   // Handle removing a client.
   const { handleRemoveClient, dClasses, btnDeleteClasses, removeClient } =
-    useClient({
-      params
-    });
+    useClient({ params });
 
   // Client details
   const { dListItems } = useClientDetails({ client });

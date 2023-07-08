@@ -27,7 +27,7 @@ export function FormBtn({
         }`}
         id={id ? id : ""}
         onClick={onClick && onClick}
-        type={"submit"}
+        type="submit"
       >
         <span
           className={`inline-block ${contentClasses ? contentClasses : ""}`}
@@ -44,7 +44,7 @@ export function FormBtn({
         }`}
         id={id ? id : ""}
         onClick={onClick && onClick}
-        type={"reset"}
+        type="reset"
       >
         <span
           className={`inline-block ${contentClasses ? contentClasses : ""}`}

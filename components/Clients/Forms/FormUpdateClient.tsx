@@ -71,9 +71,7 @@ export function FormUpdateClient({
                     labelClasses={formClasses.label}
                   >
                     {field.label}{" "}
-                    {field.required && (
-                      <span className={"text-red-500"}>*</span>
-                    )}
+                    {field.required && <span className="text-red-500">*</span>}
                   </FormLabel>
                   <Input
                     inputClasses={formClasses.input}
@@ -92,7 +90,7 @@ export function FormUpdateClient({
                 </div>
               ))}
             {/* Client Status */}
-            <div className={"mb-10"}>
+            <div className="mb-10">
               <p className={formClasses.label}>Activate this client?</p>
               <div>
                 <Controller
@@ -100,7 +98,7 @@ export function FormUpdateClient({
                   name="status"
                   render={({ field: { value, onChange } }) => (
                     <Toggle
-                      id={"isActiveClientUpdated"}
+                      id="isActiveClientUpdated"
                       checked={value}
                       onChange={onChange}
                     />
@@ -109,22 +107,22 @@ export function FormUpdateClient({
               </div>
             </div>
             {/* Edit Client Comments */}
-            <div className={"mb-10"}>
+            <div className="mb-10">
               <ContentHeader
-                containerClasses={"mb-6 pb-4 border-b border-gray-200"}
-                headingText={"Client Comments"}
-                subheadingText={"View or edit client comments."}
+                containerClasses="mb-6 pb-4 border-b border-gray-200"
+                headingText="Client Comments"
+                subheadingText="View or edit client comments."
               />
-              <div className={"flex"}>
+              <div className="flex">
                 <Button
                   primary
-                  extraClasses={"mr-3"}
-                  label={"Edit Comments"}
+                  extraClasses="mr-3"
+                  label="Edit Comments"
                   onClick={() => setIsOpen(true)}
                 />
                 <Button
                   secondary
-                  label={"View Comments"}
+                  label="View Comments"
                   onClick={() => setViewComments(true)}
                 />
               </div>
@@ -133,15 +131,15 @@ export function FormUpdateClient({
           {/* Form Actions */}
           <div>
             <ContentHeader
-              containerClasses={"pb-4 border-b border-gray-200"}
-              headingText={"Form Actions"}
-              subheadingText={"Submit, reset, or cancel form submission."}
+              containerClasses="pb-4 border-b border-gray-200"
+              headingText="Form Actions"
+              subheadingText="Submit, reset, or cancel form submission."
             />
             <FormActions
-              cancelHref={"/clients/dashboard"}
-              labelCancel={"Cancel"}
-              labelReset={"Clear Fields"}
-              labelSubmit={"Update Client"}
+              cancelHref="/clients/dashboard"
+              labelCancel="Cancel"
+              labelReset="Clear Fields"
+              labelSubmit="Update Client"
               onClickSubmit={onClickSubmit}
             />
           </div>
@@ -149,8 +147,8 @@ export function FormUpdateClient({
           <ModalClientComments
             control={control}
             isOpen={isOpen}
-            modalHeadingText={"Edit Client Comments"}
-            modalType={"editComments"}
+            modalHeadingText="Edit Client Comments"
+            modalType="editComments"
             onClick={() => setIsOpen(false)}
             onClose={() => setIsOpen(false)}
             size={"lg"}
@@ -160,8 +158,8 @@ export function FormUpdateClient({
             client={client && client}
             control={control}
             isOpen={viewComments}
-            modalHeadingText={"View Client Comments"}
-            modalType={"viewComments"}
+            modalHeadingText="View Client Comments"
+            modalType="viewComments"
             onClick={() => setViewComments(false)}
             onClose={() => setViewComments(false)}
             size={"lg"}

@@ -13,7 +13,7 @@ export function ActionCenter({
         extraClasses && extraClasses
       }`}
     >
-      <div className={`appbar__buttons`}>{children}</div>
+      <div className="appbar__buttons">{children}</div>
     </div>
   );
 }

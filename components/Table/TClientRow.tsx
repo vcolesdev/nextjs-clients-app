@@ -13,8 +13,8 @@ const BtnEditClient = ({ href }: { href: string }) => {
   `;
   return (
     <Link href={href} className={linkClasses}>
-      <span className={"inline-block"}>Edit Client</span>
-      <div className={"inline-block ml-1.5"}>
+      <span className="inline-block">Edit Client</span>
+      <div className="inline-block ml-1.5">
         <IconPencilSquare height={3.5} width={3.5} strokeWidth={2} />
       </div>
     </Link>

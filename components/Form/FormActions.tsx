@@ -21,14 +21,14 @@ export function FormActions({
     <div className={`py-6 ${containerClasses ? containerClasses : ""}`}>
       <FormBtn
         label={labelSubmit ? labelSubmit : "Submit"}
-        type={"submit"}
         onClick={onClickSubmit}
+        type="submit"
       />
-      <FormBtn label={labelReset ? labelReset : "Reset"} type={"reset"} />
+      <FormBtn label={labelReset ? labelReset : "Reset"} type="reset" />
       <FormBtn
         href={cancelHref ? cancelHref : "/"}
         label={labelCancel ? labelCancel : "Cancel"}
-        type={"cancel"}
+        type="cancel"
       />
     </div>
   );

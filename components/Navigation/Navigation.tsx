@@ -23,11 +23,11 @@ export function Navigation() {
   `;
 
   return (
-    <NavContainer navClasses={"nav"}>
-      <NavMenu menuClasses={"nav__menu"}>
+    <NavContainer navClasses="nav">
+      <NavMenu menuClasses="nav__menu">
         {navLinks ? (
           navLinks.map((link) => (
-            <NavItem key={link.title} itemClasses={"nav__item"}>
+            <NavItem key={link.title} itemClasses="nav__item">
               <NavLink
                 linkClasses={`nav__link ${
                   currentRoute === getRoute(link.route)

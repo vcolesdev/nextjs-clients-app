@@ -26,51 +26,51 @@ export function ModalClientComments({
   return (
     <>
       <Modal open={isOpen} onClose={onClose} size={size ? size : "md"}>
-        <Modal.Header className={"tracking-tight"}>
+        <Modal.Header className="tracking-tight">
           {modalHeadingText ? modalHeadingText : "Client Comments"}
         </Modal.Header>
         <Modal.Body>
           <div className={"mb-4"}>
             {modalType === "editComments" ? (
               <>
-                <div id={"EditClientComments"}>
+                <div id="EditClientComments">
                   <Controller
                     control={control}
-                    name={"comments"}
+                    name="comments"
                     render={({ field }) => (
                       <CustomEditor
-                        editorClasses={"p-4 text-sm text-gray-600"}
+                        editorClasses="p-4 text-sm text-gray-600"
                         editorState={field.value}
                         onChange={field.onChange}
                         value={field.value}
-                        wrapperClasses={"border border-gray-300"}
+                        wrapperClasses="border border-gray-300"
                       />
                     )}
                   />
                 </div>
               </>
             ) : modalType === "viewComments" ? (
-              <div id={"ViewClientComments"}>
+              <div id="ViewClientComments">
                 <div dangerouslySetInnerHTML={{ __html: client?.comments }} />
               </div>
             ) : modalType === "addComments" ? (
-              <div id={"AddClientComments"}>
+              <div id="AddClientComments">
                 <Controller
                   control={control}
-                  name={"comments"}
+                  name="comments"
                   render={({ field }) => (
                     <CustomEditor
-                      editorClasses={"p-4 text-sm text-gray-600"}
+                      editorClasses="p-4 text-sm text-gray-600"
                       editorState={field.value}
                       onChange={field.onChange}
                       value={field.value}
-                      wrapperClasses={"border border-gray-300"}
+                      wrapperClasses="border border-gray-300"
                     />
                   )}
                 />
               </div>
             ) : (
-              <div className={"text-sm text-gray-700 tracking-tight"}>
+              <div className="text-sm text-gray-700 tracking-tight">
                 Modal content here...
               </div>
             )}
@@ -78,11 +78,11 @@ export function ModalClientComments({
         </Modal.Body>
         <Modal.Footer>
           <CustomButton
-            activeColor={"violet-600"}
-            activeTextColor={"white"}
-            color={"violet-50"}
-            hoverColor={"violet-500"}
-            hoverTextColor={"white"}
+            activeColor="violet-600"
+            activeTextColor="white"
+            color="violet-50"
+            hoverColor="violet-500"
+            hoverTextColor="white"
             label={
               modalType === "editComments"
                 ? "Save Comments"
@@ -93,7 +93,7 @@ export function ModalClientComments({
                 : "Close"
             }
             onClick={onClick}
-            textColor={"violet-500"}
+            textColor="violet-500"
           />
         </Modal.Footer>
       </Modal>

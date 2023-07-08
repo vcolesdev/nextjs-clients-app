@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/Page";
 export default function Home() {
   return (
     <>
-      <PageHeader title={"Homepage"} />
+      <PageHeader title="Homepage" />
       <MainLayout>
         <p>Homepage content will go here...</p>
       </MainLayout>
